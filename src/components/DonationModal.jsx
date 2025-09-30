@@ -1,61 +1,162 @@
 import React, { useState } from 'react'
-import { X, Heart, DollarSign, CreditCard } from 'lucide-react'
+import { X, Heart, DollarSign, CreditCard, CheckCircle } from 'lucide-react'
+import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 
 // Load Stripe with your publishable key from environment variables
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_YOUR_PUBLISHABLE_KEY_HERE')
 
-const DonationModal = ({ isOpen, onClose }) => {
-  const [amount, setAmount] = useState(5)
-  const [customAmount, setCustomAmount] = useState('')
+// Card element styling
+const CARD_ELEMENT_OPTIONS = {
+  style: {
+    base: {
+      fontSize: '16px',
+      color: '#424770',
+      '::placeholder': {
+        color: '#aab7c4',
+      },
+      fontFamily: 'system-ui, -apple-system, sans-serif',
+    },
+    invalid: {
+      color: '#9e2146',
+    },
+  },
+}
+
+// Payment form component that uses Stripe Elements
+const DonationForm = ({ amount, customAmount, showCustomInput, onSuccess, onClose }) => {
+  const stripe = useStripe()
+  const elements = useElements()
   const [isProcessing, setIsProcessing] = useState(false)
-  const [showCustomInput, setShowCustomInput] = useState(false)
+  const [error, setError] = useState(null)
+  const [email, setEmail] = useState('')
 
-  const suggestedAmounts = [5, 10, 25, 50, 100]
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
-  const handleDonation = async () => {
+    if (!stripe || !elements) {
+      return
+    }
+
     setIsProcessing(true)
-    
+    setError(null)
+
     try {
-      const stripe = await stripePromise
-      
-      // In a real implementation, you would:
-      // 1. Call your backend API to create a Stripe Checkout Session
-      // 2. Redirect to Stripe Checkout
-      
-      // Example backend call:
-      const response = await fetch('/api/create-checkout-session', {
+      const donationAmount = showCustomInput ? parseFloat(customAmount) : amount
+
+      // Create payment intent on the backend
+      const response = await fetch('/api/create-payment-intent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          amount: showCustomInput ? parseFloat(customAmount) : amount,
+          amount: donationAmount,
+          email: email,
         }),
       })
-      
-      // Check if the response is ok before parsing JSON
+
       if (!response.ok) {
-        const errorText = await response.text()
-        throw new Error(`Server error: ${response.status}. ${errorText || 'Backend API not available.'}`)
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to create payment intent')
       }
-      
-      const session = await response.json()
-      
-      // Redirect to Stripe Checkout
-      const result = await stripe.redirectToCheckout({
-        sessionId: session.id,
+
+      const { clientSecret } = await response.json()
+
+      // Confirm the payment
+      const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+          billing_details: {
+            email: email,
+          },
+        },
       })
-      
-      if (result.error) {
-        alert(result.error.message)
+
+      if (stripeError) {
+        setError(stripeError.message)
+      } else if (paymentIntent.status === 'succeeded') {
+        onSuccess()
       }
-    } catch (error) {
-      console.error('Error:', error)
-      alert('There was an error processing your donation. Please try again.')
+    } catch (err) {
+      console.error('Payment error:', err)
+      setError(err.message || 'An error occurred processing your payment')
     } finally {
       setIsProcessing(false)
     }
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Email Input */}
+      <div>
+        <label className="block text-sm font-semibold text-gray-900 mb-2">
+          Email
+        </label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+          required
+          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary-600 focus:outline-none"
+        />
+      </div>
+
+      {/* Card Element */}
+      <div>
+        <label className="block text-sm font-semibold text-gray-900 mb-2">
+          Card Information
+        </label>
+        <div className="border-2 border-gray-300 rounded-lg p-4 focus-within:border-primary-600 transition-colors">
+          <CardElement options={CARD_ELEMENT_OPTIONS} />
+        </div>
+      </div>
+
+      {/* Error Message */}
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+          {error}
+        </div>
+      )}
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        disabled={!stripe || isProcessing}
+        className="w-full bg-primary-600 text-white py-4 rounded-lg font-bold text-lg hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center gap-2"
+      >
+        {isProcessing ? (
+          <>
+            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            Processing...
+          </>
+        ) : (
+          <>
+            <CreditCard className="w-5 h-5" />
+            Donate ${showCustomInput ? customAmount || '0' : amount}
+          </>
+        )}
+      </button>
+    </form>
+  )
+}
+
+const DonationModal = ({ isOpen, onClose }) => {
+  const [amount, setAmount] = useState(5)
+  const [customAmount, setCustomAmount] = useState('')
+  const [showCustomInput, setShowCustomInput] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
+
+  const suggestedAmounts = [5, 10, 25, 50, 100]
+
+  const handleSuccess = () => {
+    setShowSuccess(true)
+  }
+
+  const handleClose = () => {
+    setShowSuccess(false)
+    onClose()
   }
 
   const handleAmountSelect = (selectedAmount) => {
@@ -147,24 +248,32 @@ const DonationModal = ({ isOpen, onClose }) => {
             )}
           </div>
 
-          {/* Donation Button */}
-          <button
-            onClick={handleDonation}
-            disabled={isProcessing || (showCustomInput && !customAmount)}
-            className="w-full bg-primary-600 text-white py-4 rounded-lg font-bold text-lg hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center gap-2"
-          >
-            {isProcessing ? (
-              <>
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                Processing...
-              </>
-            ) : (
-              <>
-                <CreditCard className="w-5 h-5" />
-                Donate ${showCustomInput ? customAmount || '0' : amount}
-              </>
-            )}
-          </button>
+          {/* Payment Form or Success Message */}
+          {showSuccess ? (
+            <div className="text-center py-8">
+              <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
+              <p className="text-gray-600 mb-6">
+                Your donation has been processed successfully. We are deeply grateful for your support.
+              </p>
+              <button
+                onClick={handleClose}
+                className="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          ) : (
+            <Elements stripe={stripePromise}>
+              <DonationForm
+                amount={amount}
+                customAmount={customAmount}
+                showCustomInput={showCustomInput}
+                onSuccess={handleSuccess}
+                onClose={onClose}
+              />
+            </Elements>
+          )}
 
           {/* Alternative Payment Methods */}
           <div className="mt-6 pt-6 border-t border-gray-200">
