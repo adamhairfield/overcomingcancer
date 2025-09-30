@@ -3,15 +3,15 @@
   publish = "dist"
   functions = "netlify/functions"
 
-# Disable secret detection - Stripe publishable keys are meant to be public
+# Stripe publishable keys are meant to be public - exclude from secret scanning
 [context.production.environment]
-  NETLIFY_SKIP_SECRET_DETECTION = "true"
+  SECRETS_SCAN_OMIT_PATHS = "dist/**,node_modules/**"
 
 [context.deploy-preview.environment]
-  NETLIFY_SKIP_SECRET_DETECTION = "true"
+  SECRETS_SCAN_OMIT_PATHS = "dist/**,node_modules/**"
 
 [context.branch-deploy.environment]
-  NETLIFY_SKIP_SECRET_DETECTION = "true"
+  SECRETS_SCAN_OMIT_PATHS = "dist/**,node_modules/**"
 
 [[redirects]]
   from = "/api/*"
