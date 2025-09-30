@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Lock, Eye, EyeOff } from 'lucide-react'
+import { Lock, Eye, EyeOff, Mail } from 'lucide-react'
 
 const PasswordProtection = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -98,6 +98,17 @@ const PasswordProtection = ({ children }) => {
             Access Guidebook
           </button>
         </form>
+
+        {/* Request Access Button */}
+        <div className="mt-4">
+          <a
+            href="mailto:lesliehairfield@gmail.com?subject=Overcoming%20Cancer%20Guidebook%20Access%20Request"
+            className="w-full inline-flex items-center justify-center gap-2 bg-white border-2 border-primary-600 text-primary-600 py-3 rounded-lg font-semibold hover:bg-primary-50 active:bg-primary-100 transition-colors duration-200"
+          >
+            <Mail className="w-5 h-5" />
+            Request Access
+          </a>
+        </div>
 
         {/* Footer Note */}
         <div className="mt-6 pt-6 border-t border-gray-200">

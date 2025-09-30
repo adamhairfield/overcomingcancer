@@ -64,9 +64,7 @@ const DailySchedule = () => {
 
           <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-8">
             <p className="text-gray-700">
-              The protocol below was created for stage 4 colon cancer recovery. The beef liver and alfalfa 
-              supplements were incorporated to help hemoglobin and red blood cell counts rise and stabilize 
-              after the damaging effects of Folfiri chemotherapy.
+            The protocol below was created for my mother as she recovered from her final round of Folfiri chemo and fighting stage 4 colon cancer. The Folfiri chemo destroyed her hemoglobin, red blood cells and bone marrow as well as inhibited the production of new blood cells and stem cells. The beef liver and alfalfa supplements were incorporated to help her hemoglobin and red blood cell counts rise and stabilize after the damaging effects of Folfiri.
             </p>
           </div>
 
