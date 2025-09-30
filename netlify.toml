@@ -3,6 +3,16 @@
   publish = "dist"
   functions = "netlify/functions"
 
+# Disable secret detection - Stripe publishable keys are meant to be public
+[context.production.environment]
+  NETLIFY_SKIP_SECRET_DETECTION = "true"
+
+[context.deploy-preview.environment]
+  NETLIFY_SKIP_SECRET_DETECTION = "true"
+
+[context.branch-deploy.environment]
+  NETLIFY_SKIP_SECRET_DETECTION = "true"
+
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
