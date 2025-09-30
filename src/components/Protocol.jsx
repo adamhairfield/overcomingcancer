@@ -9,7 +9,7 @@ const Protocol = () => {
           <div className="flex items-center gap-3 mb-8">
             <Pill className="w-8 h-8 text-primary-600" />
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-              Ivermectin & Mebendazole/Fenbendazole Protocol
+              Ivermectin, Mebendazole & Fenbendazole Protocol
             </h2>
           </div>
 

@@ -173,47 +173,48 @@ const DonationModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black bg-opacity-50 backdrop-blur-sm">
+      <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl max-w-md w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-500 p-6 rounded-t-2xl relative">
+        <div className="bg-gradient-to-r from-primary-600 to-primary-500 p-4 sm:p-6 rounded-t-xl sm:rounded-t-2xl relative">
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-white hover:bg-white/20 rounded-full p-2 transition-colors"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 text-white hover:bg-white/20 rounded-full p-2 transition-colors touch-manipulation"
+            aria-label="Close"
           >
             <X className="w-5 h-5" />
           </button>
-          <div className="flex items-center gap-3 text-white">
-            <Heart className="w-8 h-8" fill="currentColor" />
+          <div className="flex items-center gap-2 sm:gap-3 text-white pr-10">
+            <Heart className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0" fill="currentColor" />
             <div>
-              <h2 className="text-2xl font-bold">Support Our Work</h2>
-              <p className="text-primary-100 text-sm">Your generosity helps us help others</p>
+              <h2 className="text-xl sm:text-2xl font-bold">Support Our Work</h2>
+              <p className="text-primary-100 text-xs sm:text-sm">Your generosity helps us help others</p>
             </div>
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-6">
-          <p className="text-gray-700 mb-6 leading-relaxed">
+        <div className="p-4 sm:p-6">
+          <p className="text-sm sm:text-base text-gray-700 mb-4 sm:mb-6 leading-relaxed">
             This guidebook is a gift for anyone who needs it. If your heart is stirred and you would 
             like to give a financial gift as a thank you for the hundreds of hours of research that 
             went into creating this resource, we are deeply grateful.
           </p>
 
           {/* Amount Selection */}
-          <div className="mb-6">
-            <label className="block text-sm font-semibold text-gray-900 mb-3">
+          <div className="mb-4 sm:mb-6">
+            <label className="block text-sm font-semibold text-gray-900 mb-2 sm:mb-3">
               Select Donation Amount
             </label>
-            <div className="grid grid-cols-3 gap-3 mb-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-3">
               {suggestedAmounts.map((suggestedAmount) => (
                 <button
                   key={suggestedAmount}
                   onClick={() => handleAmountSelect(suggestedAmount)}
-                  className={`py-3 px-4 rounded-lg font-semibold transition-all duration-200 ${
+                  className={`py-2.5 sm:py-3 px-2 sm:px-4 rounded-lg font-semibold text-sm sm:text-base transition-all duration-200 touch-manipulation ${
                     amount === suggestedAmount && !showCustomInput
-                      ? 'bg-primary-600 text-white shadow-lg scale-105'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'bg-primary-600 text-white shadow-lg sm:scale-105'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 active:bg-gray-300'
                   }`}
                 >
                   ${suggestedAmount}
@@ -221,10 +222,10 @@ const DonationModal = ({ isOpen, onClose }) => {
               ))}
               <button
                 onClick={handleCustomAmount}
-                className={`py-3 px-4 rounded-lg font-semibold transition-all duration-200 ${
+                className={`py-2.5 sm:py-3 px-2 sm:px-4 rounded-lg font-semibold text-sm sm:text-base transition-all duration-200 touch-manipulation ${
                   showCustomInput
-                    ? 'bg-primary-600 text-white shadow-lg scale-105'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-primary-600 text-white shadow-lg sm:scale-105'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 active:bg-gray-300'
                 }`}
               >
                 Custom
@@ -237,12 +238,13 @@ const DonationModal = ({ isOpen, onClose }) => {
                 <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="number"
+                  inputMode="decimal"
                   min="1"
                   step="0.01"
                   value={customAmount}
                   onChange={(e) => setCustomAmount(e.target.value)}
                   placeholder="Enter amount"
-                  className="w-full pl-10 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary-600 focus:outline-none"
+                  className="w-full pl-10 pr-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:border-primary-600 focus:outline-none"
                 />
               </div>
             )}
@@ -250,15 +252,15 @@ const DonationModal = ({ isOpen, onClose }) => {
 
           {/* Payment Form or Success Message */}
           {showSuccess ? (
-            <div className="text-center py-8">
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
-              <p className="text-gray-600 mb-6">
+            <div className="text-center py-6 sm:py-8">
+              <CheckCircle className="w-14 h-14 sm:w-16 sm:h-16 text-green-500 mx-auto mb-3 sm:mb-4" />
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
+              <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 px-2">
                 Your donation has been processed successfully. We are deeply grateful for your support.
               </p>
               <button
                 onClick={handleClose}
-                className="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
+                className="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 active:bg-primary-800 transition-colors touch-manipulation"
               >
                 Close
               </button>
@@ -276,28 +278,28 @@ const DonationModal = ({ isOpen, onClose }) => {
           )}
 
           {/* Alternative Payment Methods */}
-          <div className="mt-6 pt-6 border-t border-gray-200">
-            <p className="text-sm font-semibold text-gray-900 mb-3 text-center">
+          <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200">
+            <p className="text-xs sm:text-sm font-semibold text-gray-900 mb-2 sm:mb-3 text-center">
               Or donate directly via:
             </p>
-            <div className="space-y-2">
-              <div className="flex items-center justify-center gap-2 text-gray-700">
-                <DollarSign className="w-4 h-4 text-primary-600" />
-                <span className="text-sm">Cashapp:</span>
-                <span className="font-semibold text-primary-600">$lesliehairfield</span>
+            <div className="space-y-1.5 sm:space-y-2">
+              <div className="flex items-center justify-center gap-1.5 sm:gap-2 text-gray-700">
+                <DollarSign className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary-600" />
+                <span className="text-xs sm:text-sm">Cashapp:</span>
+                <span className="font-semibold text-primary-600 text-xs sm:text-sm">$lesliehairfield</span>
               </div>
-              <div className="flex items-center justify-center gap-2 text-gray-700">
-                <DollarSign className="w-4 h-4 text-primary-600" />
-                <span className="text-sm">Venmo:</span>
-                <span className="font-semibold text-primary-600">@adamhairfield</span>
+              <div className="flex items-center justify-center gap-1.5 sm:gap-2 text-gray-700">
+                <DollarSign className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary-600" />
+                <span className="text-xs sm:text-sm">Venmo:</span>
+                <span className="font-semibold text-primary-600 text-xs sm:text-sm">@adamhairfield</span>
               </div>
             </div>
           </div>
 
           {/* Thank You Message */}
-          <div className="mt-6 bg-primary-50 rounded-lg p-4">
-            <p className="text-sm text-gray-700 text-center">
-              <Heart className="w-4 h-4 inline text-primary-600" fill="currentColor" /> Thank you for your generosity! 
+          <div className="mt-4 sm:mt-6 bg-primary-50 rounded-lg p-3 sm:p-4">
+            <p className="text-xs sm:text-sm text-gray-700 text-center leading-relaxed">
+              <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 inline text-primary-600" fill="currentColor" /> Thank you for your generosity! 
               Your support helps us continue to provide this resource freely to those who need it.
             </p>
           </div>
