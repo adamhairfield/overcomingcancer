@@ -1,7 +1,9 @@
-import React from 'react'
-import { User, Mail, DollarSign } from 'lucide-react'
+import React, { useState } from 'react'
+import { User, Mail, Heart } from 'lucide-react'
+import DonationModal from './DonationModal'
 
 const Introduction = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   return (
     <section className="bg-white">
       <div className="section-container">
@@ -46,18 +48,13 @@ const Introduction = () => {
                 If your heart is stirred and you would like to give a financial gift as a thank you for my time, 
                 thank you in advance!
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 items-start">
-                <div className="flex items-center gap-2">
-                  <DollarSign className="w-5 h-5 text-primary-600" />
-                  <span className="font-semibold">Cashapp:</span>
-                  <span className="text-primary-600">$lesliehairfield</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <DollarSign className="w-5 h-5 text-primary-600" />
-                  <span className="font-semibold">Venmo:</span>
-                  <span className="text-primary-600">@adamhairfield</span>
-                </div>
-              </div>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors duration-200"
+              >
+                <Heart className="w-5 h-5" fill="currentColor" />
+                Support Our Work
+              </button>
             </div>
 
             <div className="flex items-center gap-2 text-gray-700">
@@ -70,6 +67,9 @@ const Introduction = () => {
           </div>
         </div>
       </div>
+
+      {/* Donation Modal */}
+      <DonationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   )
 }

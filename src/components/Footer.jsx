@@ -1,7 +1,9 @@
-import React from 'react'
-import { Heart, Mail, DollarSign } from 'lucide-react'
+import React, { useState } from 'react'
+import { Heart, Mail } from 'lucide-react'
+import DonationModal from './DonationModal'
 
 const Footer = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   return (
     <footer className="bg-gray-900 text-white">
       <div className="section-container">
@@ -36,19 +38,16 @@ const Footer = () => {
             {/* Support */}
             <div>
               <h3 className="text-xl font-bold mb-4">Support This Work</h3>
-              <p className="text-gray-400 mb-3">
+              <p className="text-gray-400 mb-4">
                 If this guidebook has helped you, consider giving a financial gift:
               </p>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 text-gray-400">
-                  <DollarSign className="w-5 h-5 text-primary-400" />
-                  <span>Cashapp: <span className="text-primary-400">$lesliehairfield</span></span>
-                </div>
-                <div className="flex items-center gap-2 text-gray-400">
-                  <DollarSign className="w-5 h-5 text-primary-400" />
-                  <span>Venmo: <span className="text-primary-400">@adamhairfield</span></span>
-                </div>
-              </div>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors duration-200"
+              >
+                <Heart className="w-5 h-5" fill="currentColor" />
+                Donate Now
+              </button>
             </div>
           </div>
 
@@ -64,6 +63,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
+      {/* Donation Modal */}
+      <DonationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </footer>
   )
 }

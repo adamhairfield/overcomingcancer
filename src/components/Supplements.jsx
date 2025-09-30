@@ -7,64 +7,64 @@ const Supplements = () => {
       name: 'Milk Thistle with Dandelion Root',
       dosage: '500mg total daily (two capsules)',
       purpose: 'Liver support',
-      link: 'https://www.amazon.com'
+      link: 'https://a.co/d/04CslxI'
     },
     {
       name: 'Vitamin D3/K2',
       dosage: '2500IU/62.5mcg daily',
       purpose: 'Immune support',
-      link: 'https://www.amazon.com'
+      link: 'https://amzn.to/46Czvbj'
     },
     {
       name: 'Bio-available Curcumin',
       dosage: '600mg daily (300mg after breakfast, 300mg after lunch)',
       purpose: 'Anti-inflammatory',
-      link: 'https://www.amazon.com'
+      link: 'https://amzn.to/46pgJW5'
     },
     {
       name: 'Enhanced Absorption Berberine',
       dosage: '500mg daily',
       purpose: 'Starves cancer cells of sugar',
-      link: 'https://www.amazon.com'
+      link: 'https://amzn.to/46q8Akg'
     },
     {
       name: 'Probiotics',
       dosage: 'Recommended dose daily on empty stomach',
       purpose: 'Gut health',
-      link: 'https://www.amazon.com'
+      link: 'https://amzn.to/3IDTJtc'
     },
     {
       name: 'Beef Liver Capsules',
       dosage: '6 capsules daily (2 with each meal)',
       purpose: 'Blood building, nutrient dense',
-      link: 'https://www.amazon.com'
+      link: 'https://amzn.to/4nHHXg8'
     },
     {
       name: 'Organic Alfalfa Greens',
       dosage: '6 capsules daily (2 with each meal)',
       purpose: 'Blood building, mineral rich',
-      link: 'https://www.amazon.com'
+      link: 'https://amzn.to/429XWvj'
     },
     {
       name: 'Methylated Multivitamin',
       dosage: 'Daily',
       purpose: 'Complete nutrition',
-      link: 'https://www.amazon.com'
+      link: 'https://amzn.to/48y0h75'
     },
     {
       name: 'Baja Gold Mineral Salt',
       dosage: 'At least twice daily',
       purpose: 'Essential minerals and electrolyte support',
-      link: 'https://www.amazon.com'
+      link: 'https://amzn.to/488mt7M'
     }
   ]
 
   const recommendedProducts = [
-    { name: 'Grounding Sheets', purpose: 'Reduce inflammation, improve sleep' },
-    { name: 'Reverse Osmosis In-Home Water Filter', purpose: 'Remove toxins from water' },
-    { name: 'Stainless Steel Water Bottle', purpose: 'Avoid microplastics' },
-    { name: 'Revive Essential Oil Cleaning Concentrate', purpose: 'Non-toxic cleaning' },
-    { name: 'Natural Laundry Detergent', purpose: 'Reduce chemical exposure' }
+    { name: 'Grounding Sheets', purpose: 'Reduce inflammation, improve sleep', link: 'https://amzn.to/3WeSYde' },
+    { name: 'Reverse Osmosis In-Home Water Filter', purpose: 'Remove toxins from water', link: 'https://a.co/d/aJBpgHo' },
+    { name: 'Stainless Steel Water Bottle', purpose: 'Avoid microplastics', link: 'https://amzn.to/3KtmB84' },
+    { name: 'Revive Essential Oil Cleaning Concentrate', purpose: 'Non-toxic cleaning', link: 'https://amzn.to/3VHxeXo' },
+    { name: 'Natural Laundry Detergent', purpose: 'Reduce chemical exposure', link: 'https://a.co/d/brFzSOX' }
   ]
 
   return (
@@ -112,7 +112,16 @@ const Supplements = () => {
               {recommendedProducts.map((product, index) => (
                 <div key={index} className="bg-white rounded-lg p-4">
                   <h4 className="font-bold text-gray-900 mb-1">{product.name}</h4>
-                  <p className="text-gray-600 text-sm">{product.purpose}</p>
+                  <p className="text-gray-600 text-sm mb-3">{product.purpose}</p>
+                  <a 
+                    href={product.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold text-sm"
+                  >
+                    View on Amazon
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
                 </div>
               ))}
             </div>

@@ -20,7 +20,7 @@ const Protocol = () => {
                 <p className="text-gray-700 mb-2">
                   To learn more about the differences between Mebendazole and Fenbendazole,{' '}
                   <a 
-                    href="https://www.drwilliammakis.com" 
+                    href="https://www.onedaymd.com/2023/12/fenbendazole-vs-mebendazole-what-is.html" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-blue-600 hover:text-blue-700 font-semibold inline-flex items-center gap-1"
@@ -93,6 +93,99 @@ const Protocol = () => {
                   <span><strong>Total daily dose:</strong> Ivermectin 50mg / Mebendazole 500mg</span>
                 </li>
               </ul>
+            </div>
+          </div>
+
+          {/* Dr. William Makis Dosage Tables */}
+          <div className="mb-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+              Dr. William Makis MD - Protocol for Cancer
+            </h3>
+            
+            {/* Ivermectin Dosage Table */}
+            <div className="mb-8">
+              <h4 className="text-xl font-bold text-center mb-4 text-red-700">IVERMECTIN DOSAGE</h4>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse border-2 border-gray-300">
+                  <thead>
+                    <tr>
+                      <th className="bg-green-400 border-2 border-gray-300 p-3 text-white font-bold">LOW DOSE</th>
+                      <th className="bg-yellow-300 border-2 border-gray-300 p-3 font-bold">MEDIUM DOSE</th>
+                      <th className="bg-pink-300 border-2 border-gray-300 p-3 font-bold">HIGH DOSE</th>
+                      <th className="bg-red-500 border-2 border-gray-300 p-3 text-white font-bold">VERY HIGH DOSE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="bg-green-100 border-2 border-gray-300 p-3 text-center font-semibold">≤ 0.5mg/kg</td>
+                      <td className="bg-yellow-50 border-2 border-gray-300 p-3 text-center font-semibold">1.0mg/kg</td>
+                      <td className="bg-pink-100 border-2 border-gray-300 p-3 text-center font-semibold">2.0mg/kg</td>
+                      <td className="bg-red-100 border-2 border-gray-300 p-3 text-center font-semibold">≥ 2.5mg/kg</td>
+                    </tr>
+                    <tr>
+                      <td className="bg-green-50 border-2 border-gray-300 p-3 text-sm">Cancers in remission Strong family history Genetic predisposition Prophylaxis</td>
+                      <td className="bg-yellow-50 border-2 border-gray-300 p-3 text-sm">Starting dose for most cancers</td>
+                      <td className="bg-pink-50 border-2 border-gray-300 p-3 text-sm">Dose for very aggressive cancers (leukemia, pancreas, brain cancers)</td>
+                      <td className="bg-red-50 border-2 border-gray-300 p-3 text-sm">Extensive metastatic disease Extremely poor prognosis Brain cancers?</td>
+                    </tr>
+                    <tr>
+                      <td className="bg-green-50 border-2 border-gray-300 p-3 text-sm">No long term side effects</td>
+                      <td className="bg-yellow-50 border-2 border-gray-300 p-3 text-sm">No long term side effects</td>
+                      <td className="bg-pink-50 border-2 border-gray-300 p-3 text-sm">No long term side effects</td>
+                      <td className="bg-red-50 border-2 border-gray-300 p-3 text-sm">Possible short term & transient visual effects</td>
+                    </tr>
+                    <tr>
+                      <td className="bg-green-50 border-2 border-gray-300 p-3 text-xs">Dr. Tess Lawrie reported a case of Stage 3 Ovarian Cancer, treated with chemo and 12mg of IVM per day. Ca125 dropped 288 to 22 after 2 months. Tumor vanished.</td>
+                      <td className="bg-yellow-50 border-2 border-gray-300 p-3 text-xs">Dr. Shankara Chetty reported a 70 yo prostate ca patient with PSA 89, placed on 45mg IVM per day, after two months, PSA dropped from 89.1 to 10.9. IVM given in combination with Lactoferrin.</td>
+                      <td className="bg-pink-50 border-2 border-gray-300 p-3 text-xs">Dr. Allan Landrito had a Stage 4 gallbladder patient who took 2mg/kg/day for 14 months (cancer disappeared)</td>
+                      <td className="bg-red-50 border-2 border-gray-300 p-3 text-xs">Dr. Shankara Chetty had a patient on 2.5mg/kg/day with no side effects</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Fenbendazole Dosage Table */}
+            <div>
+              <h4 className="text-xl font-bold text-center mb-4 text-red-700">FENBENDAZOLE DOSAGE</h4>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse border-2 border-gray-300">
+                  <thead>
+                    <tr>
+                      <th className="bg-green-400 border-2 border-gray-300 p-3 text-white font-bold">LOW DOSE</th>
+                      <th className="bg-yellow-300 border-2 border-gray-300 p-3 font-bold">MEDIUM DOSE</th>
+                      <th className="bg-pink-300 border-2 border-gray-300 p-3 font-bold">HIGH DOSE</th>
+                      <th className="bg-red-500 border-2 border-gray-300 p-3 text-white font-bold">VERY HIGH DOSE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="bg-green-100 border-2 border-gray-300 p-3 text-center font-semibold">222mg 3x per week</td>
+                      <td className="bg-yellow-50 border-2 border-gray-300 p-3 text-center font-semibold">222mg/day (6 days a week)</td>
+                      <td className="bg-pink-100 border-2 border-gray-300 p-3 text-center font-semibold">444mg/day (6 days a week)</td>
+                      <td className="bg-red-100 border-2 border-gray-300 p-3 text-center font-semibold">888mg or 1000mg/day (6 days a week)</td>
+                    </tr>
+                    <tr>
+                      <td className="bg-green-50 border-2 border-gray-300 p-3 text-sm">Cancers in remission Strong family history Genetic predisposition Prophylaxis</td>
+                      <td className="bg-yellow-50 border-2 border-gray-300 p-3 text-sm">Starting dose for most cancers Weight &lt; 200lb</td>
+                      <td className="bg-pink-50 border-2 border-gray-300 p-3 text-sm">mRNA Turbo Cancer Aggressive Cancers Stage 4 Weight 200+ lb</td>
+                      <td className="bg-red-50 border-2 border-gray-300 p-3 text-sm">Extensive metastatic disease Extremely poor prognosis</td>
+                    </tr>
+                    <tr>
+                      <td className="bg-green-50 border-2 border-gray-300 p-3 text-sm">Check liver function & kidney function</td>
+                      <td className="bg-yellow-50 border-2 border-gray-300 p-3 text-sm">Check liver function & kidney function</td>
+                      <td className="bg-pink-50 border-2 border-gray-300 p-3 text-sm">Check liver function & kidney function</td>
+                      <td className="bg-red-50 border-2 border-gray-300 p-3 text-sm">Check liver function & kidney function</td>
+                    </tr>
+                    <tr>
+                      <td className="bg-green-50 border-2 border-gray-300 p-3 text-xs">222mg Fenbendazole 3 days on, 4 days off(panacur C) Vitamin E 800 IU/ day Curcumin 600mg/day CBD oil 25mg/day</td>
+                      <td className="bg-yellow-50 border-2 border-gray-300 p-3 text-xs">Taken with/after meal Milk Thistle 250mg twice a day with food (liver support)</td>
+                      <td className="bg-pink-50 border-2 border-gray-300 p-3 text-xs">Taken with/after meal Milk Thistle 250mg twice a day with food (liver support)</td>
+                      <td className="bg-red-50 border-2 border-gray-300 p-3 text-xs">Max 30-50mg/kg/day for 5 days (very rarely used in this dose range)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
