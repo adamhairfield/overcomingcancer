@@ -12,26 +12,29 @@ import DitchThat from './components/DitchThat'
 import Resources from './components/Resources'
 import Footer from './components/Footer'
 import FloatingDonationButton from './components/FloatingDonationButton'
+import PasswordProtection from './components/PasswordProtection'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
 
   return (
-    <div className="min-h-screen">
-      <Header activeSection={activeSection} setActiveSection={setActiveSection} />
-      <Hero />
-      <Introduction />
-      <Disclaimer />
-      <Protocol />
-      <DailySchedule />
-      <Supplements />
-      <Nutrition />
-      <MealPlan />
-      <DitchThat />
-      <Resources />
-      <Footer />
-      <FloatingDonationButton />
-    </div>
+    <PasswordProtection>
+      <div className="min-h-screen">
+        <Header activeSection={activeSection} setActiveSection={setActiveSection} />
+        <Hero />
+        <Introduction />
+        <Disclaimer />
+        <Protocol />
+        <DailySchedule />
+        <Supplements />
+        <Nutrition />
+        <MealPlan />
+        <DitchThat />
+        <Resources />
+        <Footer />
+        <FloatingDonationButton />
+      </div>
+    </PasswordProtection>
   )
 }
 
