@@ -1,9 +1,53 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Pill, ExternalLink, Info } from 'lucide-react'
+import DonationModal from './DonationModal'
 
 const Protocol = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const sectionRef = useRef(null)
+  const hasShownModal = useRef(false)
+
+  useEffect(() => {
+    // Check if we've already shown the modal this session
+    const modalShown = sessionStorage.getItem('donation_modal_shown')
+    if (modalShown === 'true') {
+      hasShownModal.current = true
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // If section is visible and we haven't shown the modal yet
+          if (entry.isIntersecting && !hasShownModal.current) {
+            // Small delay to ensure smooth scroll
+            setTimeout(() => {
+              setIsModalOpen(true)
+              hasShownModal.current = true
+              sessionStorage.setItem('donation_modal_shown', 'true')
+            }, 500)
+          }
+        })
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the section is visible
+      }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
+  }, [])
+
   return (
-    <section id="protocol" className="bg-white">
+    <>
+      <section id="protocol" className="bg-white" ref={sectionRef}>
       <div className="section-container">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-3 mb-8">
@@ -221,6 +265,10 @@ const Protocol = () => {
         </div>
       </div>
     </section>
+
+    {/* Donation Modal */}
+    <DonationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    </>
   )
 }
 
